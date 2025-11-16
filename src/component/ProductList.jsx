@@ -6,8 +6,6 @@ import { useNavigate } from 'react-router-dom'
 const ProductList = () => {
   const products = useSelector((state) => state.product)
   const navigate = useNavigate()
-  console.log(products);
-  
   return (
     <div className="list-container">
       <div className="list-wrapper">
@@ -30,9 +28,12 @@ const ProductList = () => {
           <div className="empty-state">No products yet. Add some using the form.</div>
         ) : (
           <div className="products-grid">
-            {products.map((p) => {
-              const productId = nanoid();
-              return (<div className="product-card" key={productId} onClick={() => {navigate(`/list/${productId}`)}}>
+            {products.map((p) => (
+              <div 
+                className="product-card" 
+                key={p.id} 
+                onClick={() => navigate(`/detail/${p.id}`)}
+              >
                 <div className="product-title">{p.name || 'Untitled'}</div>
                 <div className="product-desc">{p.description || '-'}</div>
                 <div className="product-meta">
@@ -40,8 +41,8 @@ const ProductList = () => {
                   <div className="meta-item">Size: {Array.isArray(p.size) ? p.size.join(', ') : p.size || '-'}</div>
                   <div className="meta-item">Color: {Array.isArray(p.color) ? p.color.join(', ') : p.color || '-'}</div>
                 </div>
-              </div>)
-            })}
+              </div>
+            ))}
           </div>
         )}
       </div>

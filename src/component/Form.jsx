@@ -3,6 +3,7 @@ import "./Form.css";
 import { useDispatch } from "react-redux";
 import { addProduct } from "../redux/slices/ProductSlice";
 import { useNavigate } from "react-router-dom";
+import { nanoid } from "nanoid";
 
 const Form = () => {
   const navigate = useNavigate();
@@ -39,7 +40,6 @@ const Form = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Before dispatch:", formData);
 
     // let pastProduct = localStorage.getItem("productes")
     //   ? JSON.parse(localStorage.getItem("productes"))
@@ -48,8 +48,9 @@ const Form = () => {
     //   "productes",
     //   JSON.stringify([...pastProduct, formData])
     // );
-    dispatch(addProduct(formData));
-    // Reset form after submission
+    const productId = nanoid();
+    const productWithId = { ...formData, id: productId };
+    dispatch(addProduct(productWithId));
     setFormData({
       name: "",
       description: "",

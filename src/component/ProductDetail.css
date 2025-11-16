@@ -1,0 +1,71 @@
+/* Reuse form-like styles for details page */
+
+.form-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  padding: 20px;
+}
+
+.form-wrapper {
+  background: white;
+  padding: 32px;
+  border-radius: 10px;
+  border: 1px solid #e0e0e0;
+  width: 100%;
+  max-width: 600px;
+}
+
+.form-wrapper h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.detail-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.detail-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.detail-label {
+  min-width: 100px;
+  font-weight: 700;
+  color: #333;
+}
+
+.detail-value {
+  flex: 1;
+  color: #444;
+  background: #fafafa;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #f0f0f0;
+}
+
+.back-link {
+  display: inline-block;
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.empty-state {
+  text-align: center;
+  color: #666;
+  padding: 24px 8px;
+}
+
+@media (max-width: 600px) {
+  .form-wrapper { padding: 20px }
+  .detail-label { min-width: 80px }
+}
