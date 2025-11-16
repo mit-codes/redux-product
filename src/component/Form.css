@@ -86,6 +86,13 @@
   font-size: 14px;
 }
 
+.button-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-top: 20px;
+}
+
 .submit-btn {
   width: 100%;
   padding: 12px;
@@ -96,16 +103,42 @@
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s ease;
-  margin-top: 10px;
+  transition: all 0.2s ease;
 }
 
 .submit-btn:hover {
   background: #5568d3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
 }
 
 .submit-btn:active {
   background: #667eea;
+  transform: translateY(0);
+}
+
+.view-list-btn {
+  width: 100%;
+  padding: 12px;
+  background: #48bb78;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.view-list-btn:hover {
+  background: #38a169;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(72, 187, 120, 0.3);
+}
+
+.view-list-btn:active {
+  background: #48bb78;
+  transform: translateY(0);
 }
 
 @media (max-width: 600px) {
@@ -120,5 +153,10 @@
 
   .form-wrapper h1 {
     font-size: 24px;
+  }
+
+  .button-section {
+    grid-template-columns: 1fr;
+    gap: 10px;
   }
 }

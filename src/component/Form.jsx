@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import "./Form.css";
 import { useDispatch } from "react-redux";
 import { addProduct } from "../redux/slices/ProductSlice";
+import { useNavigate } from "react-router-dom";
 
 const Form = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const sizeOptions = ["XS", "S", "M", "L", "XL", "XXL"];
   const colorOptions = ["Red", "Blue", "Black", "White", "Green", "Yellow"];
@@ -26,23 +28,28 @@ const Form = () => {
 
   const handleCheckBox = (e) => {
     const { name, id } = e.target;
-    if (formData[name].includes(id)) {
-      formData[name].splice(formData[name].indexOf(id), 1);
-    } else {
-      formData[name].push(id);
-    }
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: prev[name].includes(id)
+        ? prev[name].filter((item) => item !== id)
+        : [...prev[name], id],
+    }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let pastProduct = localStorage.getItem("productes")
-      ? JSON.parse(localStorage.getItem("productes"))
-      : [];
-    localStorage.setItem(
-      "productes",
-      JSON.stringify([...pastProduct, formData])
-    );
+    console.log("Before dispatch:", formData);
+
+    // let pastProduct = localStorage.getItem("productes")
+    //   ? JSON.parse(localStorage.getItem("productes"))
+    //   : [];
+    // localStorage.setItem(
+    //   "productes",
+    //   JSON.stringify([...pastProduct, formData])
+    // );
     dispatch(addProduct(formData));
+    // Reset form after submission
     setFormData({
       name: "",
       description: "",
@@ -92,8 +99,10 @@ const Form = () => {
                     type="checkbox"
                     name="size"
                     id={size}
+                    checked={formData.size.includes(size)}
                     onChange={handleCheckBox}
                   />
+
                   <label htmlFor={`size-${size}`}>{size}</label>
                 </div>
               ))}
@@ -109,9 +118,10 @@ const Form = () => {
                     type="checkbox"
                     name="color"
                     id={color}
+                    checked={formData.color.includes(color)}
                     onChange={handleCheckBox}
-                    value={color}
                   />
+
                   <label htmlFor={`color-${color}`}>{color}</label>
                 </div>
               ))}
@@ -132,9 +142,18 @@ const Form = () => {
             />
           </div>
 
-          <button type="submit" className="submit-btn">
-            Add Product
-          </button>
+          <div className="button-section">
+            <button type="submit" className="submit-btn">
+              Add Product
+            </button>
+            <button 
+              type="button" 
+              className="view-list-btn"
+              onClick={() => navigate("/list")}
+            >
+              View Product List
+            </button>
+          </div>
         </form>
       </div>
     </div>
